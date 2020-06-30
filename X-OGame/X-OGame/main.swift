@@ -16,7 +16,7 @@ func greeting() {
     print("Welcome to X-O Game🤩")
     print()
     print("Choose a level⚡️")
-    print("Easy:🐢", "Medium:🐼", "Hard:🦁")
+    print("Easy🐢", "Medium🐼", "Hard🦁")
    choice = readLine()!
   
 
@@ -24,11 +24,11 @@ func greeting() {
 
 func chooseLevels(choose: String) {
     
-       if choose == "🐢"
+       if choose == "Easy"
        { Easy() }
-       else if choose == "🐼"
+       else if choose == "Medium"
        { Medium() }
-          else if choose == "🦁"
+          else if choose == "Hard"
        { Hard() }
        else{
            Medium()
@@ -51,6 +51,27 @@ func restart() {
         f[i-1] =  "\(i)"
         }
     }
+// Input is a Int not a letter (coverting to input)
+func vaildRange(_ i: Int) -> Bool {
+    return i < 10 && i > 0
+}
+// input is selecting a vacant spot
+func vacant(_ i: Int) -> Bool{
+    return f[i-1] != X && f[i-1] != O
+}
+
+
+func inputAndValidate() -> Int {
+    while true {
+        if let input = Int(readLine()!),
+        vaildRange(input) && vacant(input)
+    
+        {
+            return input
+        }
+        print("Wrong input⚠️ Try again!")
+    }
+}
 
 func turn() {
     for i in 0..<9 {
@@ -109,14 +130,13 @@ func Easy() {
    
     let randomNumber = Int.random(in: 1...9)
     
+       for i in 1...9 {
+           if f[i] != O && f[i] != X {
+              f[i] = O
+              break
+           }
+       }
    
-        for i in 1...9 {
-            if f[i] != O && f[i] != X {
-                f[i] = O
-                break
-            }
-        }
-    
 }
 
 
